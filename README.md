@@ -9,6 +9,7 @@ To run the project, follow these steps:
 1. Clone the repository to your local machine:
 
 `git clone https://github.com/Incogn1tto/goit-js-hw-07.git`
+
 2. Open the project folder in your favorite text editor or integrated development environment (IDE).
 
 3. Open the index.html file in your web browser.
