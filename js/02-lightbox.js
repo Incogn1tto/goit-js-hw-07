@@ -10,6 +10,7 @@ const createGalleryMarkup = galleryItems
   <li class="gallery__item">
   <a class="gallery__link" href="${original}">
     <img
+    loading="lazy"
       class="gallery__image"
       src="${preview}"
       data-source="${original}"

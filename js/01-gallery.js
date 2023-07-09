@@ -18,6 +18,7 @@ const createGalleryMarkup = ({ description, original, preview }) => {
   imgEl.classList.add("gallery__image");
   imgEl.src = preview;
   imgEl.setAttribute("data-source", original);
+  imgEl.setAttribute("loading", "lazy");
   imgEl.alt = description;
 
   linkEl.append(imgEl);
