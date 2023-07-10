@@ -6,32 +6,46 @@ import { galleryItems } from "./gallery-items.js";
 const galleryContainerEl = document.querySelector(".gallery");
 
 // Роблю розмітку елемента галереї
-const createGalleryMarkup = ({ description, original, preview }) => {
-  const itemEl = document.createElement("li");
-  itemEl.classList.add("gallery__item");
+// const createGalleryMarkup = ({ description, original, preview }) => {
+//   const itemEl = document.createElement("li");
+//   itemEl.classList.add("gallery__item");
 
-  const linkEl = document.createElement("a");
-  linkEl.classList.add("gallery__link");
-  linkEl.href = original;
+//   const linkEl = document.createElement("a");
+//   linkEl.classList.add("gallery__link");
+//   linkEl.href = original;
 
-  const imgEl = document.createElement("img");
-  imgEl.classList.add("gallery__image");
-  imgEl.src = preview;
-  imgEl.setAttribute("data-source", original);
-  imgEl.setAttribute("loading", "lazy");
-  imgEl.alt = description;
+//   const imgEl = document.createElement("img");
+//   imgEl.classList.add("gallery__image");
+//   imgEl.src = preview;
+//   imgEl.setAttribute("data-source", original);
+//   imgEl.setAttribute("loading", "lazy");
+//   imgEl.alt = description;
 
-  linkEl.append(imgEl);
-  itemEl.append(linkEl);
+//   linkEl.append(imgEl);
+//   itemEl.append(linkEl);
 
-  return itemEl;
-};
-
-// Мапаю, щоб для кожного елементу масиву створвся елемент галереї
-const items = galleryItems.map(createGalleryMarkup);
-
+//   return itemEl;
+// };
+// const items = galleryItems.map(createGalleryMarkup);
+const createGalleryMarkup = galleryItems
+  .map(
+    ({ description, original, preview }) => `
+<li class="gallery__item">
+  <a class="gallery__link" href="${original}">
+    <img
+    loading="lazy"
+      class="gallery__image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
+    />
+  </a>
+</li>
+`
+  )
+  .join("");
 // Розгортаю елементи галереї в контейнер
-galleryContainerEl.append(...items);
+galleryContainerEl.insertAdjacentHTML("afterbegin", createGalleryMarkup);
 
 // Змінна на модалку
 let lightbox;
@@ -54,4 +68,5 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     lightbox.close();
   }
+  galleryContainerEl.removeEventListener("keydown", e);
 });
