@@ -64,9 +64,17 @@ galleryContainerEl.addEventListener("click", (e) => {
 });
 
 // Роблю закриття по натисканню еск
-document.addEventListener("keydown", (e) => {
+// document.addEventListener("keydown", (e) => {
+//   if (e.key === "Escape") {
+//     lightbox.close();
+//   }
+// });
+
+function onKeyDown(e) {
   if (e.key === "Escape") {
     lightbox.close();
+    galleryContainerEl.removeEventListener("keydown", onKeyDown);
   }
-  galleryContainerEl.removeEventListener("keydown", e);
-});
+}
+
+document.addEventListener("keydown", onKeyDown);
